@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Илья & Диана | Свадебное приглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9f7f7;
+            font-family: 'Cormorant Infant', serif;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        /* Анимации */
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeinup {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeinleft {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeinright {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes zoomin {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .animate-fadein { animation: fadein 5s ease 0.2s forwards; opacity: 0; }
+        .animate-fadeinup { animation: fadeinup 5s ease 0.5s forwards; opacity: 0; }
+        .animate-fadeinleft { animation: fadeinleft 5s ease 0.5s forwards; opacity: 0; }
+        .animate-fadeinright { animation: fadeinright 5s ease 0.5s forwards; opacity: 0; }
+        .animate-zoomin { animation: zoomin 5s ease 0.5s forwards; opacity: 0; }
+
+        .hero {
+            position: relative;
+            height: 610px;
+            overflow: hidden;
+            background-color: #2c2c2c;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: auto;
+            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .hero-names {
+            font-size: 60px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        .hero-date {
+            font-size: 60px;
+            font-weight: 400;
+        }
+        @media (max-width: 768px) {
+            .hero { height: 480px; }
+            .hero-names { font-size: 40px; }
+            .hero-subtitle { font-size: 18px; }
+            .hero-date { font-size: 40px; }
+        }
+
+        .main-content {
+            background-color: #f9f7f7;
+            padding: 60px 20px;
+        }
+
+        .section {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 47px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .section-text {
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+        .quote {
+            font-size: 32px;
+            font-style: italic;
+            font-family: Georgia, serif;
+            font-weight: 300;
+            margin-top: 30px;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+        .gallery-item {
+            width: 308px;
+            height: 498px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .gallery-item { width: 200px; height: 323px; }
+        }
+
+        .schedule-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        .schedule-col {
+            text-align: center;
+            min-width: 120px;
+        }
+        .schedule-time {
+            font-size: 50px;
+            font-weight: 400;
+        }
+        .schedule-label {
+            font-size: 23px;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+        .schedule-line {
+            width: 100px;
+            height: 1px;
+            background: #000;
+            margin: 20px auto;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        .card-block {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 500px;
+            border: 1px solid #000;
+        }
+        .card-block h3 {
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .card-block p {
+            font-size: 20px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .buttons-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .btn-max, .btn-telegram {
+            display: inline-block;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .btn-max {
+            background-color: #2e5754;
+        }
+        .btn-telegram {
+            background-color: #0088cc;
+        }
+        .btn-max:hover, .btn-telegram:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+
+        .hall-photo {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .dresscode-photo {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timer-cover {
+            height: 80vh;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 80px;
+            background-color: #2c2c2c;
+        }
+        .timer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+        }
+        .timer-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #f9f7f7;
+        }
+        .timer-title {
+            font-size: 62px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+        .timer-digits {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .timer-number {
+            font-size: 60px;
+            font-weight: 400;
+        }
+        .timer-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contacts-block {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .contacts-block p {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+        .phone-number {
+            font-size: 32px;
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 32px; }
+            .section-text { font-size: 18px; }
+            .quote { font-size: 24px; }
+            .timer-title { font-size: 32px; }
+            .timer-number { font-size: 40px; }
+            .btn-max, .btn-telegram { padding: 10px 20px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <img src="https://ilya777641.github.io/ilya-diana-wedding/9fac3704-239c-4f60-8aa2-d89baa589815.jpg" alt="Илья и Диана" class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-names animate-fadeinup">
+            Илья<br>&<br>Диана
+        </div>
+        <div class="hero-subtitle animate-fadeinup" style="animation-delay: 0.7s;">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+        <div class="hero-date animate-fadeinup" style="animation-delay: 0.9s;">31.07.2026</div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="section">
+        <div class="section-title animate-fadein" id="guestGreeting">Дорогие друзья!</div>
+        <div class="section-text animate-fadein" style="animation-delay: 0.3s;">
+            Мы счастливы пригласить вас на наше великое событие - свадьбу!
+        </div>
+        <div class="section-text animate-fadein" style="animation-delay: 0.5s;">
+            Этот день будет являться самым значимым и запоминающимся в нашей жизни, и мы хотим разделить его с вами!
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item animate-fadeinright">
+            <img src="https://ilya777641.github.io/ilya-diana-wedding/kazan.jpg" alt="Фото слева">
+        </div>
+        <div class="gallery-item animate-zoomin">
+            <img src="https://ilya777641.github.io/ilya-diana-wedding/priroda.jpg" alt="Фото по центру">
+        </div>
+        <div class="gallery-item animate-fadeinleft">
+            <img src="https://ilya777641.github.io/ilya-diana-wedding/zelen.jpg" alt="Фото справа">
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="https://static.tildacdn.com/tild6330-6339-4030-b236-646537636231/heart_18956525.png" alt="heart" style="width: 57px; margin: 20px auto;">
+        <div class="quote" style="font-size: 32px;"><em>Счастье - это, когда ты нашёл того, кто искал тебя.</em></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title animate-fadein">место проведения</div>
+        <div class="section-text animate-fadein" style="animation-delay: 0.2s;">
+            по адресу:<br>Элеваторная ул., 13, посёлок Мелькомбинат, Уфа
+        </div>
+        <div style="width: 60px; height: 1px; background: #000; margin: 20px auto;"></div>
+        <div class="section-text animate-fadein" style="animation-delay: 0.4s;">
+            место проведения торжества<br>ресторан "Версаль", зал "Царский"
+        </div>
+        <img src="https://ilya777641.github.io/ilya-diana-wedding/zal.jpg" alt="Зал Версаль" class="hall-photo animate-fadein" style="animation-delay: 0.6s;">
+    </div>
+
+    <div class="section">
+        <div class="section-title animate-fadein">Программа дня</div>
+        <div class="schedule-grid">
+            <div class="schedule-col animate-fadein"><div class="schedule-time">15:30</div><div class="schedule-label">Сбор гостей</div></div>
+            <div class="schedule-col animate-fadein" style="animation-delay: 0.2s;"><div class="schedule-time">16:00</div><div class="schedule-label">Торжественная регистрация</div></div>
+            <div class="schedule-col animate-fadein" style="animation-delay: 0.4s;"><div class="schedule-time">17:00</div><div class="schedule-label">Праздничный банкет</div></div>
+            <div class="schedule-col animate-fadein" style="animation-delay: 0.6s;"><div class="schedule-time">22:00</div><div class="schedule-label">Завершение вечера</div></div>
+            <div class="schedule-col animate-fadein" style="animation-delay: 0.8s;"><div class="schedule-time">23:00</div><div class="schedule-label">Завершение дискотеки</div></div>
+        </div>
+        <div class="schedule-line"></div>
+    </div>
+
+    <div class="cards-container">
+        
+        <div class="card-block animate-fadeinright">
+            <h3>ДЕТАЛИ</h3>
+            <p>Мы создали группы, куда можно будет добавлять фото и видео с нашей свадьбы, чтобы сохранить в памяти лучшие моменты.</p>
+            <div class="buttons-row">
+                <a href="https://max.ru/join/MleaFiKVgDlmSVq3Aw-aavJiCIyh62ZdqjyyWpfxEv4" target="_blank" class="btn-max">📱 ВСТУПИТЬ В MAX</a>
+                <a href="https://t.me/+qm_suAjnZ2RmOWZi" target="_blank" class="btn-telegram">💬 ВСТУПИТЬ В TELEGRAM</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title animate-fadein">Дресс-код</div>
+        <div class="section-text animate-fadein" style="animation-delay: 0.2s;">
+            Для нас самое главное-ваше присутствие!<br>Но мы будем очень признательны, если вы поддержите цветовую гамму спокойных природных оттенков!
+        </div>
+        <div style="margin: 30px auto; text-align: center;">
+            <img src="https://ilya777641.github.io/ilya-diana-wedding/dresscode.jpg" alt="Дресс-код" class="dresscode-photo animate-fadein" style="animation-delay: 0.4s;">
+        </div>
+        <div class="quote" style="font-size: 32px; margin-top: 20px;"><em>Спасибо!</em></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title animate-fadein">контакты</div>
+        <div class="contacts-block animate-fadein" style="animation-delay: 0.2s;">
+            <p>По всем вопросам, связанным с торжественным вечером и сюрпризами, обращаться<br>к нашему ведущему:</p>
+            <div style="margin-top: 20px;">
+                <strong style="font-size: 32px;">Арсений Вольный</strong><br>
+                <a href="tel:+79173597707" class="phone-number">+7 917 359-77-07</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="timer-cover" style="background-image: url('https://ilya777641.github.io/ilya-diana-wedding/9fac3704-239c-4f60-8aa2-d89baa589815.jpg');">
+    <div class="timer-overlay"></div>
+    <div class="timer-content">
+        <div class="timer-title animate-fadeinup">До торжества осталось:</div>
+        <div class="timer-digits animate-fadeinup" style="animation-delay: 0.3s;">
+            <div class="timer-block"><div class="timer-number" id="days">00</div><div class="timer-label">Дни</div></div>
+            <div class="timer-block"><div class="timer-number" id="hours">00</div><div class="timer-label">Часы</div></div>
+            <div class="timer-block"><div class="timer-number" id="minutes">00</div><div class="timer-label">Минуты</div></div>
+            <div class="timer-block"><div class="timer-number" id="seconds">00</div><div class="timer-label">Секунды</div></div>
+        </div>
+        <div class="animate-fadeinup" style="animation-delay: 0.5s; margin-top: 40px;">
+            <div style="background: rgba(0,0,0,0.5); display: inline-block; padding: 12px 30px; border-radius: 4px;">
+                Мы будем рады видеть Вас на нашей свадьбе!
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== ПЕРСОНАЛИЗАЦИЯ ГОСТЯ ==========
+    function getGuestNameFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let guest = urlParams.get('guest');
+        if (guest) {
+            guest = decodeURIComponent(guest);
+            return guest;
+        }
+        return null;
+    }
+
+    function getCorrectGreeting(guestName) {
+        if (!guestName) return "Дорогие друзья!";
+        
+        // Проверяем, есть ли в имени несколько человек
+        let isMultiple = guestName.includes(' и ') || guestName.includes('&') || guestName.includes(',');
+        
+        // Если в имени несколько людей
+        if (isMultiple) {
+            let cleaned = guestName.replace(/[&,]/g, ' и').replace(/\s+/g, ' ').trim();
+            return `Дорогие ${cleaned}!`;
+        }
+        
+        // Список женских имён, оканчивающихся не на а/я
+const femaleExceptions = ['Любовь', 'Николь', 'Жаклин', 'Ассоль', 'Жизель', 'Габриэль', 'Мишель'];
+    
+// Проверяем, есть ли имя в списке исключений
+if (femaleExceptions.includes(guestName)) {
+    return `Дорогая ${guestName}!`;
+}
+    
+// Если имя одно — определяем род по окончанию
+let lastName = guestName.slice(-1);
+if (lastName === 'а' || lastName === 'я') {
+    return `Дорогая ${guestName}!`;
+} else {
+    return `Дорогой ${guestName}!`;
+}
+    }
+
+    const guestName = getGuestNameFromURL();
+    const greetingElement = document.getElementById('guestGreeting');
+    if (greetingElement) {
+        greetingElement.textContent = getCorrectGreeting(guestName);
+    }
+    // ==========================================
+
+    // Таймер до 31 июля 2026
+    function updateTimer() {
+        const target = new Date(2026, 6, 31, 0, 0, 0);
+        const now = new Date();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+</script>
+
+<audio id="bg-music" loop>
+    <source src="https://www.dropbox.com/scl/fi/8bl8yd5teyrcwc02h8tvh/Love-Me-Like-You-Do-From-_Fifty-Shades-Of-Grey_.mp3?rlkey=dx2vt43o35c0pjypewqiuyhi0&st=8ufbubk8&raw=1" type="audio/mpeg">
+</audio>
+<button id="music-toggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 0 10px rgba(0,0,0,0.3); font-size: 16px; cursor: pointer;">🔊</button>
+<script>
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-toggle');
+    let isPlaying = false;
+    
+    document.addEventListener('click', function() {
+        if (!isPlaying) {
+            music.play().catch(() => {});
+            isPlaying = true;
+            btn.textContent = '🔇';
+        }
+    }, { once: true });
+    
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!music.paused) {
+            music.pause();
+            btn.textContent = '🔊';
+            isPlaying = false;
+        } else {
+            music.play();
+            btn.textContent = '🔇';
+            isPlaying = true;
+        }
+    });
+</script>
+
+</body>
+</html>
